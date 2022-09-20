@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('dogs 資料', dogs);
+
+    // Interpolated
+    console.log('耶! %s 我是原始資料', '插入的資料💩');
+
+    // Styled
+    console.log('讓我變 %c綠色', 'color: green');
+
+    // warning!
+    console.warn('警告! 警告!');
+
+    // Error :|
+    console.error('錯誤! 錯誤!');
+
+    // Info
+    console.info('我是信息!');
+
+    // Testing
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('test'), '結果為 false!')
+
+    // clearing
+    // console.clear();
+
+    // Viewing DOM Elements
+    console.log(p); // 顯示被指向的 DOM
+    console.dir(p); // 有屬性
+
+    // Grouping together
+    dogs.forEach(dog => {
+      console.groupCollapsed(dog.name)
+      // console.group(dog.name) 資料為展開
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.groupEnd(dog.name);
+    })
+
+    // counting
+    const array = ['a', 'b', 'c', 'a', 'a', 'b', 'b'];
+    array.forEach(text => {
+      console.count(text);
+    })
+
+    // timing
+    console.time('alert');
+    alert("Go Go Let's Go~~~~");
+    console.timeEnd('alert');
+    // console.timeLog();
+
+    // table
+    console.table(dogs);
+
+  </script>
+</body>
+
+</html>

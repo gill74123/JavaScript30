@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+</head>
+
+<body>
+  <h1>隱藏密語為：gillchin</h1>
+  <p>你輸入的密語：</p>
+  <script>
+    const secretCode = 'gillchin';
+    let pressed = [];
+
+    window.addEventListener('keyup', goSecret);
+    function goSecret(e) {
+      pressed.push(e.key);
+      // 將陣列維持在 <= secretCode 長度 (維持固定長度)
+      if (pressed.length > secretCode.length) {
+        pressed.shift();
+      }
+      // 將陣列轉換成字串接起來
+      let pressedStr = pressed.join('');
+      document.querySelector('p').innerHTML = `你輸入的密語：${pressedStr}`;
+      // 看字串內是否有包含 secretCode
+      if (pressedStr.includes(secretCode)) {
+        cornify_add();
+      }
+    }
+  </script>
+</body>
+
+</html>

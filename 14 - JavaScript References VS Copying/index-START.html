@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Reference VS Copy</title>
+</head>
+<body>
+  <h1>看 Console</h1>
+  <script>
+    // start with strings, numbers and booleans
+
+    // Let's say we have an array
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy', {num: 1}];
+
+    // and we want to make a copy of it.
+    // You might think we can just do something like this:
+    // however what happens when we update that array?
+    // now here is the problem!
+    // oh no - we have edited the original array too!
+    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+    // So, how do we fix this? We take a copy instead!
+
+    // one way
+    // or create a new array and concat the old one in
+    // concat 方式 (淺拷貝)
+    const array1 = [].concat(players);
+    array1[3] = 'Amy';
+    // array1[4].num = 2;
+    console.log(players, array1);
+
+    // or use the new ES6 Spread
+    // now when we update it, the original one isn't changed
+    // 陣列展開方式 (淺拷貝)
+    const array2 = [...players];
+    array2[3] = 'Joy';
+    // array2[4].num = 2;
+    console.log(players, array2);
+
+    // Array.from 方式 (淺拷貝)
+    const array3 = Array.from(players);
+    array3[3] = 'Bonnie';
+    // array3[4].num = 2;
+    console.log(players, array3);
+
+    // slice 方式 (淺拷貝)
+    const array4 = players.slice();
+    array4[3] = 'Alice';
+    array4[4].num = 2;
+    console.log(players, array4);
+
+
+    // The same thing goes for objects, let's say we have a person object
+    // with Objects
+    const person = {
+      name: 'Wes Bos',
+      age: 80,
+      social: {
+        lineId: 'abcde',
+        faceBook: '12345'
+      }
+    };
+
+    // and think we make a copy:
+    // how do we take a copy instead?
+
+    // Object.assign({}, 拷貝物件) 方式 (淺拷貝)
+    const object1 = Object.assign({}, person);
+    object1.age = 99;
+    // object1.social.lineId = 'jkl';
+    console.log(person, object1);
+
+    // We will hopefully soon see the object ...spread
+    // object 展開方式 (淺拷貝)
+    const object2 = {...person};
+    object2.age = 100;
+    // object2.social.faceBook = '09876';
+    console.log(person, object2);
+
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    // JSON.parse(JSON.stringify(物件)) 方式 (深拷貝)
+    const object3 = JSON.parse(JSON.stringify(person));
+    object3.age = 18;
+    object3.social.lineId = 'hello';
+    console.log(person, object3);
+  </script>
+
+</body>
+</html>
